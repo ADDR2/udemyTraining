@@ -1,7 +1,7 @@
 package main
 
-import "github.com/ADDR2/udemyTraining/pointers"
+import "github.com/ADDR2/udemyTraining/functions"
 
 func main() {
-	pointers.ExecPointersExample()
+	functions.ExecFunctionsExample()
 }
