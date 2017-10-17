@@ -1,7 +1,7 @@
 package main
 
-import "github.com/ADDR2/udemyTraining/functions"
+import "github.com/ADDR2/udemyTraining/slices"
 
 func main() {
-	functions.ExecFunctionsExample()
+	slices.ExecSlicesExample()
 }
