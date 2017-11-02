@@ -2,6 +2,8 @@ package structs
 
 import "fmt"
 import "encoding/json"
+import "os"
+import "strings"
 
 type Person struct {
 	first string
@@ -66,5 +68,12 @@ func ExecStructsExample() {
 
 	fmt.Println(me1.Name, me1.Age)
 	fmt.Printf("%T\n", me1)
+
+	me2 := Me{"Amaro", "Wisdom", 32}
+	json.NewEncoder(os.Stdout).Encode(me2)
+
+	rdr := strings.NewReader(`{"The Name":"Gabriela", "Age":26}`)
+	json.NewDecoder(rdr).Decode(&me1)
+	fmt.Println(me1)
 	fmt.Println("\n|-------End of structs pacakge-------------|\n")
 }

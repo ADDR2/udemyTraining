@@ -1,11 +1,13 @@
 package main
 
-import "github.com/ADDR2/udemyTraining/structs"
-import "fmt"
+import (
+	"github.com/ADDR2/udemyTraining/interfaces"
+)
 
 func main() {
-	structs.ExecStructsExample()
+	/*structs.ExecStructsExample()
 	p := structs.Person{Arm: structs.Arm{}}
 	p.SetStrengh(56)
-	fmt.Println(p.GetStrengh())
+	fmt.Println(p.GetStrengh())*/
+	interfaces.ExecInterfacesExample()
 }
