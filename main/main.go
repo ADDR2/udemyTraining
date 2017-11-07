@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ADDR2/udemyTraining/concurrency"
+	"github.com/ADDR2/udemyTraining/channels"
 )
 
 func main() {
@@ -9,5 +9,5 @@ func main() {
 	p := structs.Person{Arm: structs.Arm{}}
 	p.SetStrengh(56)
 	fmt.Println(p.GetStrengh())*/
-	concurrency.ExecAtomicityExample()
+	channels.ExecPassingExample()
 }
