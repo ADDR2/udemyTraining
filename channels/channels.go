@@ -232,3 +232,41 @@ func puller(c chan int) chan int {
 	}()
 	return out
 }
+
+/*ExecBackExample is the main function of channels package*/
+func ExecBackExample() {
+	fmt.Println("|-------Beginning of channels package-------|\n")
+	c := make(chan int)
+
+	go func() {
+		for i := 0; i < 10; i++ {
+			c <- i
+		}
+		close(c)
+	}()
+
+	for n := range c {
+		fmt.Println(n)
+	}
+	fmt.Println("\n|-------End of channels pacakge-------------|\n")
+}
+
+/*ExecFactorial is the main function of channels package*/
+func ExecFactorial() {
+	fmt.Println("|-------Beginning of channels package-------|\n")
+	fmt.Println(<-factorial(4))
+	fmt.Println("\n|-------End of channels pacakge-------------|\n")
+}
+
+func factorial(n int) chan int {
+	out := make(chan int)
+	go func() {
+		total := 1
+		for i := n; i > 0; i-- {
+			total *= i
+		}
+		out <- total
+		close(out)
+	}()
+	return out
+}
