@@ -1,0 +1,1 @@
+2017/12/11 16:42:15 Math error: 50.2289 N 99.4656 W square root of negative number: -10
