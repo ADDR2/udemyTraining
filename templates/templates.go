@@ -1,11 +1,11 @@
 package templates
 
 import (
+	"html/template"
 	"log"
 	"math"
 	"os"
 	"strings"
-	"text/template"
 	"time"
 )
 
@@ -216,6 +216,24 @@ func ExecTemplatesPassingDatesExample() {
 func ExecTemplatesPipelineExample() {
 
 	err := tpl.ExecuteTemplate(os.Stdout, "pipeline.gohtml", 3)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+/*ExecTemplatesGlobalExample*/
+func ExecTemplatesGlobalExample() {
+
+	err := tpl.ExecuteTemplate(os.Stdout, "global.gohtml", []string{"zero", "one", "two", "three", "four", "five"})
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+/*ExecTemplatesComplexExample*/
+func ExecTemplatesComplexExample() {
+
+	err := tpl.ExecuteTemplate(os.Stdout, "complex-template.gohtml", 42)
 	if err != nil {
 		log.Fatalln(err)
 	}
