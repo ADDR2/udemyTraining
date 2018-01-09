@@ -9,5 +9,5 @@ func main() {
 	p := structs.Person{Arm: structs.Arm{}}
 	p.SetStrengh(56)
 	fmt.Println(p.GetStrengh())*/
-	templates.ExecTemplatesPassingMapsExample()
+	templates.ExecTemplatesPipelineExample()
 }
