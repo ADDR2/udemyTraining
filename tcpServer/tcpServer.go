@@ -103,3 +103,15 @@ func ExecTCPDialExample() {
 
 	fmt.Println(string(bs))
 }
+
+/*ExecTCPWriteDialExample*/
+func ExecTCPWriteDialExample() {
+	conn, err := net.Dial("tcp", "localhost:8080")
+	if err != nil {
+		panic(err)
+	}
+
+	defer conn.Close()
+
+	fmt.Fprintln(conn, "I dialed you.")
+}
