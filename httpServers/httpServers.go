@@ -3,6 +3,7 @@ package httpServers
 import (
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -15,7 +16,9 @@ func init() {
 type id int
 
 func (identifier id) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Any code you want in this func")
+	w.Header().Set("Amaro-key", "This is from Amaro")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprintln(w, "<h1>Any code you want in this func</h1>")
 }
 
 /*ExecHTTPServersExample is the main function of httpServers package*/
@@ -76,5 +79,67 @@ func ExecHTTPFormDatailedExample() {
 	var identifier another
 	moreData = true
 	http.ListenAndServe(":8080", identifier)
+	fmt.Println("\n|-------End of httpServers pacakge-------------|\n")
+}
+
+type hotdog int
+
+func (handler hotdog) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	io.WriteString(res, "dog dog doggy")
+}
+
+type hotcat int
+
+func (handler hotcat) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	io.WriteString(res, "cat cat cat")
+}
+
+/*ExecHTTPMuxExample  --  */
+func ExecHTTPMuxExample() {
+	fmt.Println("|-------Beginning of httpServers package-------|\n")
+	var dog hotdog
+	var cat hotcat
+
+	mux := http.NewServeMux()
+	mux.Handle("/dog/", dog) // catches: /dog, /dog/, /dog/something/else and so on
+	mux.Handle("/cat", cat)  // catches: /cat
+
+	http.ListenAndServe(":8080", mux)
+	fmt.Println("\n|-------End of httpServers pacakge-------------|\n")
+}
+
+/*ExecHTTPDefaultMuxExample  --  */
+func ExecHTTPDefaultMuxExample() {
+	fmt.Println("|-------Beginning of httpServers package-------|\n")
+
+	http.HandleFunc("/dog/", func(res http.ResponseWriter, req *http.Request) {
+		io.WriteString(res, "dog dog doggy")
+	})
+
+	http.HandleFunc("/cat", func(res http.ResponseWriter, req *http.Request) {
+		io.WriteString(res, "cat cat cat")
+	})
+
+	http.ListenAndServe(":8080", nil)
+	fmt.Println("\n|-------End of httpServers pacakge-------------|\n")
+}
+
+func firstHandleFunc(res http.ResponseWriter, req *http.Request) {
+	io.WriteString(res, "First first first")
+}
+
+func secondHandleFunc(res http.ResponseWriter, req *http.Request) {
+	io.WriteString(res, "Second second second")
+}
+
+/*ExecHTTPMuxFuncExample  --  */
+func ExecHTTPMuxFuncExample() {
+	fmt.Println("|-------Beginning of httpServers package-------|\n")
+
+	mux := http.NewServeMux()
+	mux.Handle("/first/", http.HandlerFunc(firstHandleFunc))  // catches: /dog, /dog/, /dog/something/else and so on
+	mux.Handle("/second", http.HandlerFunc(secondHandleFunc)) // catches: /cat
+
+	http.ListenAndServe(":8080", mux)
 	fmt.Println("\n|-------End of httpServers pacakge-------------|\n")
 }
